@@ -16,6 +16,7 @@
                 <button id="importBtn" class="btn btn-secondary btn-small" title="從 JSON 匯入資料">匯入</button>
                 <input type="file" id="importFile" accept=".json" style="display: none;">
                 <button id="resetDbBtn" class="btn btn-danger btn-small" title="清除所有提示詞與資料夾">重設</button>
+                <button id="helpBtn" class="btn-icon theme-toggle" title="使用說明">❓</button>
                 <button id="themeToggleBtn" class="btn-icon theme-toggle" title="切換深色/淺色模式">🌙</button>
                 <button id="addPromptBtn" class="btn btn-primary">新增提示詞</button>
             </div>
@@ -160,6 +161,56 @@
                         <button type="submit" class="btn btn-primary">複製</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Help / Usage Tips -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content" style="max-width: 560px;">
+            <div class="modal-header">
+                <h2>❓ 使用說明</h2>
+                <span class="close-btn" id="closeHelpModalBtn">&times;</span>
+            </div>
+            <div class="modal-body help-modal-body">
+
+                <div class="help-section">
+                    <h3>🧩 變數模板語法</h3>
+                    <p>在提示詞內容中使用以下語法定義變數，複製時系統會彈出填寫視窗並自動替換：</p>
+                    <pre><code>{{變數名稱}}    ← 雙大括號
+[變數名稱]     ← 方括號（不可接括號連結）</code></pre>
+                    <p><strong>範例：</strong></p>
+                    <pre><code>你是一位 {{角色}} 專家，請用 {{語氣}} 的方式
+回答以下問題：[問題內容]</code></pre>
+                </div>
+
+                <div class="help-section">
+                    <h3>🔍 搜尋技巧</h3>
+                    <ul>
+                        <li>直接輸入關鍵字 → 搜尋標題與內容</li>
+                        <li>輸入 <code>#標籤名稱</code> → 只搜尋標籤</li>
+                        <li>可同時套用資料夾 + 標籤 + 關鍵字三層篩選</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h3>📦 資料備份建議</h3>
+                    <ul>
+                        <li>所有資料儲存於瀏覽器 <strong>IndexedDB</strong>，不會上傳至任何伺服器</li>
+                        <li>建議定期點擊右上角「<strong>匯出</strong>」下載 JSON 備份檔</li>
+                        <li>更換瀏覽器或清除瀏覽器資料前，請務必先備份</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h3>📌 其他操作</h3>
+                    <ul>
+                        <li>點擊卡片右上角 <strong>☆</strong> 可釘選，釘選的提示詞永遠排在最前面</li>
+                        <li>提示詞內容支援 <strong>Markdown</strong> 語法（標題、粗體、程式碼等）</li>
+                        <li>新增 / 編輯時可即時預覽 Markdown 渲染結果</li>
+                    </ul>
+                </div>
+
             </div>
         </div>
     </div>

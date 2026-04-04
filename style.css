@@ -794,8 +794,73 @@ body {
     word-break: break-word;
 }
 
-.preview-pane:empty::before {
-    content: "預覽將在此顯示…";
-    color: var(--text-muted);
-    font-style: italic;
+/* ── Help Modal ── */
+.help-modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.help-section {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.help-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.help-section h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.help-section p {
+    font-size: 14px;
+    color: var(--dark-gray);
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.help-section ul {
+    padding-left: 1.4em;
+    font-size: 14px;
+    color: var(--dark-gray);
+    line-height: 1.8;
+}
+
+.help-section pre {
+    background-color: var(--light-gray);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 13px;
+    overflow-x: auto;
+    margin: 8px 0;
+}
+
+.help-section pre code {
+    font-family: "Consolas", "Monaco", monospace;
+    background: none;
+    padding: 0;
+}
+
+.help-section code {
+    background-color: rgba(0,0,0,0.06);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: "Consolas", "Monaco", monospace;
+    font-size: 0.9em;
+}
+
+[data-theme="dark"] .help-section pre {
+    background-color: rgba(255,255,255,0.05);
+}
+
+[data-theme="dark"] .help-section code {
+    background-color: rgba(255,255,255,0.1);
 }

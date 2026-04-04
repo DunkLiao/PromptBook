@@ -811,10 +811,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     closeVariableModalBtn.addEventListener('click', () => variableModal.classList.remove('show'));
     cancelVariableBtn.addEventListener('click', () => variableModal.classList.remove('show'));
 
+    // --- Help Modal ---
+    const helpBtn = document.getElementById('helpBtn');
+    const helpModal = document.getElementById('helpModal');
+    const closeHelpModalBtn = document.getElementById('closeHelpModalBtn');
+
+    helpBtn.addEventListener('click', () => helpModal.classList.add('show'));
+    closeHelpModalBtn.addEventListener('click', () => helpModal.classList.remove('show'));
+
     window.addEventListener('click', (e) => {
         if (e.target === promptModal) closeModal();
         if (e.target === folderModal) closeFolderModal();
         if (e.target === variableModal) variableModal.classList.remove('show');
+        if (e.target === helpModal) helpModal.classList.remove('show');
     });
 
     // Utilities

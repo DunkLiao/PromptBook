@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>提示詞管理系統 (Prompt Manager)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>提示詞管理系統</h1>
+            <div class="header-actions">
+                <div id="storageInfo" class="storage-info">載入儲存空間資訊...</div>
+                <button id="exportBtn" class="btn btn-secondary btn-small" title="匯出所有資料為 JSON">匯出</button>
+                <button id="importBtn" class="btn btn-secondary btn-small" title="從 JSON 匯入資料">匯入</button>
+                <input type="file" id="importFile" accept=".json" style="display: none;">
+                <button id="resetDbBtn" class="btn btn-danger btn-small" title="清除所有提示詞與資料夾">重設</button>
+                <button id="themeToggleBtn" class="btn-icon theme-toggle" title="切換深色/淺色模式">🌙</button>
+                <button id="addPromptBtn" class="btn btn-primary">新增提示詞</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="layout-container container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="section-header">
+                    <h2>資料夾</h2>
+                    <button id="addFolderBtn" class="btn-icon" title="新增資料夾">+</button>
+                </div>
+                <div id="folderTree" class="folder-tree">
+                    <div class="folder-item active" data-folder-id="all">
+                        <span class="folder-icon">📚</span>
+                        <span class="folder-name">所有提示詞</span>
+                    </div>
+                    <div class="folder-item" data-folder-id="unassigned">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">未分類</span>
+                    </div>
+                    <!-- Dynamic folders will be appended here -->
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="section-header">
+                    <h2>熱門標籤</h2>
+                </div>
+                <div id="tagCloud" class="tag-cloud">
+                    <p class="empty-text">尚無標籤</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="搜尋標題、內容或輸入 #標籤...">
+            </div>
+
+            <div class="content-header">
+                <h2 id="currentViewTitle">所有提示詞</h2>
+                <div id="activeFilters" class="active-filters"></div>
+            </div>
+
+            <div id="promptList" class="prompt-grid">
+                <!-- Prompts will be rendered here by JS -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Add/Edit Prompt -->
+    <div id="promptModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">新增提示詞</h2>
+                <span class="close-btn" id="closeModalBtn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="promptForm">
+                    <input type="hidden" id="promptId">
+                    <div class="form-group">
+                        <label for="promptFolder">儲存位置</label>
+                        <select id="promptFolder" required>
+                            <option value="unassigned">未分類</option>
+                            <!-- Dynamic folders will be appended here -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="promptTitle">標題</label>
+                        <input type="text" id="promptTitle" required placeholder="輸入標題">
+                    </div>
+                    <div class="form-group editor-form-group">
+                        <div class="editor-label-row">
+                            <label for="promptContent">內容</label>
+                            <span class="preview-label-tag">預覽</span>
+                        </div>
+                        <div class="editor-split">
+                            <textarea id="promptContent" class="editor-pane" rows="8" required placeholder="輸入提示詞內容（支援 Markdown，例如 **粗體**、`程式碼`）"></textarea>
+                            <div id="promptPreview" class="preview-pane markdown-body"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="promptTags">標籤 (用逗號分隔)</label>
+                        <input type="text" id="promptTags" placeholder="例如: coding, writing, js">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelBtn">取消</button>
+                        <button type="submit" class="btn btn-primary">儲存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Add/Edit Folder -->
+    <div id="folderModal" class="modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2 id="folderModalTitle">新增資料夾</h2>
+                <span class="close-btn" id="closeFolderModalBtn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="folderForm">
+                    <input type="hidden" id="folderId">
+                    <div class="form-group">
+                        <label for="folderName">資料夾名稱</label>
+                        <input type="text" id="folderName" required placeholder="輸入資料夾名稱">
+                    </div>
+                    <div class="form-group">
+                        <label for="folderParent">上層資料夾</label>
+                        <select id="folderParent">
+                            <option value="">無 (最上層)</option>
+                            <!-- Dynamic folders will be appended here -->
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelFolderBtn">取消</button>
+                        <button type="submit" class="btn btn-primary">儲存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Variables -->
+    <div id="variableModal" class="modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2 id="variableModalTitle">填寫變數</h2>
+                <span class="close-btn" id="closeVariableModalBtn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 15px; color: var(--text-muted); font-size: 14px;">此提示詞包含變數，請填寫內容後再複製：</p>
+                <form id="variableForm">
+                    <div id="variableInputs"></div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelVariableBtn">取消</button>
+                        <button type="submit" class="btn btn-primary">複製</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">已複製到剪貼簿</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

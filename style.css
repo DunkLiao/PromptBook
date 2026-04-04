@@ -1,0 +1,801 @@
+:root {
+    /* 主要配色 */
+    --primary-color: #9A0036; /* 紅色 - 品牌色 */
+    --primary-hover: #7A002B;
+    
+    /* 輔助色 */
+    --secondary-pink: #EEBAC0;
+    --secondary-magenta: #941C61;
+    --white: #FFFFFF;
+    --light-gray: #F5F5F5;
+    --dark-gray: #333333;
+    --text-muted: #666666;
+    
+    /* 強調色 (CTA) */
+    --accent-gold: #D4AF37;
+    --accent-orange: #F39C12;
+    
+    /* 介面元素 */
+    --bg-color: var(--light-gray);
+    --card-bg: var(--white);
+    --border-color: #E0E0E0;
+    --border-radius: 6px; /* 圓角矩形 */
+    --box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* 微妙的陰影 */
+    --transition: all 0.3s ease;
+}
+
+[data-theme="dark"] {
+    --primary-color: #FF4D85;
+    --primary-hover: #FF73A1;
+    --secondary-pink: #4A152B;
+    --secondary-magenta: #C22B85;
+    --white: #1E1E1E;
+    --light-gray: #2D2D2D;
+    --dark-gray: #E0E0E0;
+    --text-muted: #A0A0A0;
+    --bg-color: #121212;
+    --card-bg: #1E1E1E;
+    --border-color: #333333;
+    --box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "PingFang TC", "Microsoft JhengHei", -apple-system, sans-serif; /* 無襯線字體 */
+    background-color: var(--bg-color);
+    color: var(--dark-gray);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Header - 品牌識別 */
+.header {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 20px 0;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* 儲存資訊 - 數據準確性與專業感 */
+.storage-info {
+    font-size: 12px;
+    color: var(--white);
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 按鈕設計 - 圓角矩形、微妙陰影、強調色 */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.btn-primary {
+    background-color: var(--accent-orange); /* 使用強調色作為 CTA */
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #E67E22;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-pink);
+    color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: #E5A9B1;
+}
+
+.btn-magenta {
+    background-color: var(--secondary-magenta);
+    color: white;
+}
+
+.btn-danger {
+    background-color: #BDC3C7;
+    color: #333;
+}
+
+.btn-danger:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+/* Layout Container */
+.layout-container {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    position: sticky;
+    top: 20px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.sidebar-section {
+    margin-bottom: 30px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.section-header h2 {
+    font-size: 16px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.btn-icon:hover {
+    background-color: var(--secondary-pink);
+}
+
+/* Folder Tree */
+.folder-tree {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.folder-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--dark-gray);
+    font-size: 14px;
+    user-select: none;
+    position: relative;
+}
+
+.folder-item:hover {
+    background-color: var(--light-gray);
+}
+
+.folder-item.active {
+    background-color: rgba(154, 0, 54, 0.08);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.folder-icon {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.folder-name {
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.folder-actions {
+    display: none;
+    gap: 4px;
+}
+
+.folder-item:hover .folder-actions {
+    display: flex;
+}
+
+.folder-action-btn {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+.folder-action-btn:hover {
+    background-color: #ddd;
+    color: var(--dark-gray);
+}
+
+.sub-folders {
+    margin-left: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+    border-left: 1px solid var(--border-color);
+    padding-left: 4px;
+}
+
+/* Tag Cloud */
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.cloud-tag {
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.cloud-tag:hover {
+    border-color: var(--secondary-pink);
+    color: var(--primary-color);
+}
+
+.cloud-tag.active {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+.empty-text {
+    color: #999;
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* Main Content Header */
+.content-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.content-header h2 {
+    font-size: 22px;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.active-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-badge {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-remove {
+    cursor: pointer;
+    font-weight: bold;
+    opacity: 0.8;
+}
+
+.filter-remove:hover {
+    opacity: 1;
+}
+
+/* Card Pin Button */
+.prompt-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.pin-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #ccc;
+    transition: var(--transition);
+    padding: 4px;
+    line-height: 1;
+}
+
+.pin-btn:hover {
+    color: var(--accent-gold);
+    transform: scale(1.1);
+}
+
+.pin-btn.pinned {
+    color: var(--accent-gold);
+}
+
+/* 搜尋列 */
+.search-bar {
+    margin-bottom: 30px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 14px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    background-color: var(--white);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(154, 0, 54, 0.1);
+}
+
+/* 格狀佈局 */
+.prompt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+}
+
+/* 卡片式設計 - 白色背景搭配淺色邊框 */
+.prompt-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+}
+
+.prompt-card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    border-color: var(--secondary-pink);
+}
+
+.prompt-card h3 {
+    margin-bottom: 12px;
+    font-size: 20px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* 內容區塊 - Markdown 渲染 */
+.prompt-content {
+    background-color: var(--light-gray);
+    padding: 14px;
+    border-radius: 4px;
+    margin: 16px 0;
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 180px;
+    font-size: 14px;
+    color: var(--dark-gray);
+    border: 1px solid #EDEDED;
+    font-family: inherit;
+    word-break: break-word;
+}
+
+/* 標籤 - 專業與友善 */
+.prompt-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.tag {
+    background-color: var(--secondary-pink);
+    color: var(--primary-color);
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.prompt-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--light-gray); /* 細線分隔 */
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 900px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--light-gray);
+    border-radius: 8px 8px 0 0;
+}
+
+.modal-header h2 {
+    color: var(--primary-color);
+    font-size: 20px;
+}
+
+.close-btn {
+    font-size: 28px;
+    cursor: pointer;
+    color: #999;
+    transition: var(--transition);
+}
+
+.close-btn:hover {
+    color: var(--primary-color);
+}
+
+.modal-body {
+    padding: 28px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--dark-gray);
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    font-size: 15px;
+    transition: var(--transition);
+}
+
+/* Editor pane overrides the generic textarea width */
+.form-group textarea.editor-pane {
+    width: auto;
+    background-color: var(--card-bg);
+    color: var(--dark-gray);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(154, 0, 54, 0.05);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+/* Toast - 金色強調重要資訊 */
+.toast {
+    visibility: hidden;
+    min-width: 200px;
+    background-color: var(--accent-gold);
+    color: var(--white);
+    text-align: center;
+    border-radius: 4px;
+    padding: 12px 24px;
+    position: fixed;
+    z-index: 1001;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%);
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* ── Dark Mode Toggle Button ── */
+.theme-toggle {
+    font-size: 20px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+/* ── Markdown Typography (Card + Preview Pane) ── */
+.prompt-content,
+.preview-pane {
+    line-height: 1.7;
+}
+
+.prompt-content p,
+.preview-pane p {
+    margin-bottom: 0.6em;
+}
+
+.prompt-content h1, .preview-pane h1 { font-size: 1.4em; font-weight: 700; margin: 0.5em 0 0.3em; color: var(--primary-color); }
+.prompt-content h2, .preview-pane h2 { font-size: 1.2em; font-weight: 700; margin: 0.5em 0 0.3em; color: var(--primary-color); }
+.prompt-content h3, .preview-pane h3 { font-size: 1.05em; font-weight: 700; margin: 0.5em 0 0.3em; }
+.prompt-content h4, .preview-pane h4 { font-size: 1em; font-weight: 600; margin: 0.4em 0 0.2em; }
+
+.prompt-content ul,
+.preview-pane ul,
+.prompt-content ol,
+.preview-pane ol {
+    padding-left: 1.5em;
+    margin-bottom: 0.6em;
+}
+
+.prompt-content li,
+.preview-pane li {
+    margin-bottom: 0.2em;
+}
+
+.prompt-content code,
+.preview-pane code {
+    background-color: rgba(0,0,0,0.06);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: "Consolas", "Monaco", monospace;
+    font-size: 0.9em;
+}
+
+[data-theme="dark"] .prompt-content code,
+[data-theme="dark"] .preview-pane code {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.prompt-content pre,
+.preview-pane pre {
+    background-color: rgba(0,0,0,0.06);
+    padding: 10px 14px;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-bottom: 0.6em;
+}
+
+[data-theme="dark"] .prompt-content pre,
+[data-theme="dark"] .preview-pane pre {
+    background-color: rgba(255,255,255,0.08);
+}
+
+.prompt-content pre code,
+.preview-pane pre code {
+    background: none;
+    padding: 0;
+}
+
+.prompt-content blockquote,
+.preview-pane blockquote {
+    border-left: 3px solid var(--primary-color);
+    padding-left: 12px;
+    color: var(--text-muted);
+    margin: 0.5em 0 0.6em;
+    font-style: italic;
+}
+
+.prompt-content strong,
+.preview-pane strong {
+    font-weight: 700;
+    color: var(--dark-gray);
+}
+
+.prompt-content em,
+.preview-pane em {
+    font-style: italic;
+}
+
+.prompt-content a,
+.preview-pane a {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* ── Editor Split Pane ── */
+.editor-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-label-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.editor-label-row label {
+    font-weight: 600;
+    color: var(--dark-gray);
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.preview-label-tag {
+    font-size: 12px;
+    padding: 2px 8px;
+    background-color: var(--secondary-pink);
+    color: var(--primary-color);
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.editor-split {
+    display: flex;
+    gap: 12px;
+    min-height: 220px;
+}
+
+.editor-pane {
+    flex: 1;
+    min-width: 0;
+    resize: none;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-family: "Consolas", "Monaco", monospace;
+    font-size: 14px;
+    background-color: var(--card-bg);
+    color: var(--dark-gray);
+    transition: var(--transition);
+    overflow-y: auto;
+}
+
+.editor-pane:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(154, 0, 54, 0.05);
+}
+
+.preview-pane {
+    flex: 1;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--light-gray);
+    font-size: 14px;
+    color: var(--dark-gray);
+    overflow-y: auto;
+    word-break: break-word;
+}
+
+.preview-pane:empty::before {
+    content: "預覽將在此顯示…";
+    color: var(--text-muted);
+    font-style: italic;
+}

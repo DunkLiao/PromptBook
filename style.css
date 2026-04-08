@@ -510,6 +510,9 @@ body {
     border-radius: 8px;
     width: 90%;
     max-width: 900px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
     box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     animation: slideIn 0.3s ease-out;
 }
@@ -547,6 +550,8 @@ body {
 
 .modal-body {
     padding: 28px;
+    overflow-y: auto;
+    flex: 1;
 }
 
 .form-group {
@@ -757,7 +762,7 @@ body {
 .editor-split {
     display: flex;
     gap: 12px;
-    min-height: 220px;
+    height: 300px;
 }
 
 .editor-pane {
